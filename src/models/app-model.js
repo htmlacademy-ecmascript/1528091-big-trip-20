@@ -37,7 +37,8 @@ class AppModel extends Model{
    */
 
   getOfferGroups() {
-    return this.#offerGroups;
+    //@ts-ignore
+    return structuredClone(this.#offerGroups);
   }
 
   /**

@@ -22,7 +22,8 @@ function formatTime(dateTime) {
 }
 
 /**
- * @param {string} dateTime
+ * @param {string} startDateTime
+ * @param {string} endDateTime
  * @return {string}
  */
 function formatDuration(startDateTime, endDateTime) {
