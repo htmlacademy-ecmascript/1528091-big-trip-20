@@ -31,7 +31,7 @@ class View extends HTMLElement {
   notify(type, detail = null) {
     const cancelable = true;
     const bubbles = true;
-    const event = new CustomEvent(type, {detail, cancelable, bubbles});
+    const event = new CustomEvent(type, { detail, cancelable, bubbles });
     return this.dispatchEvent(event);
   }
 
