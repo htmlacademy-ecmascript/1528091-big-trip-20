@@ -20,37 +20,37 @@ new AddPresenter(document.querySelector('add-view'));
 new SortPresenter(document.querySelector('sort-view'));
 new FilterPresenter(document.querySelector('filter-view'));
 new ListPresenter(document.querySelector('list-view'), appModel);
-/**
-  * @type {BriefView}
- */
-const briefView = document.querySelector('brief-view');
+// /**
+//   * @type {BriefView}
+//  */
+// const briefView = document.querySelector('brief-view');
 
-/**
-  * @type {AddView}
- */
+// /**
+//   * @type {AddView}
+//  */
 
-const addView = document.querySelector('add-view');
+// const addView = document.querySelector('add-view');
 
-/**
-  * @type {FilterView}
- */
+// /**
+//   * @type {FilterView}
+//  */
 
-const filterView = document.querySelector('filter-view');
+// const filterView = document.querySelector('filter-view');
 
-/**
-  * @type {SortView}
- */
+// /**
+//   * @type {SortView}
+//  */
 
-const sortView = document.querySelector('sort-view');
+// const sortView = document.querySelector('sort-view');
 
-/**
-  * @type {ListView}
- */
+// /**
+//   * @type {ListView}
+//  */
 
-const listView = document.querySelector('list-view');
+// const listView = document.querySelector('list-view');
 
-briefView.render();
-addView.render();
-filterView.render();
-sortView.render();
-listView.render();
+// briefView.render();
+// addView.render();
+// filterView.render();
+// sortView.render();
+// listView.render();

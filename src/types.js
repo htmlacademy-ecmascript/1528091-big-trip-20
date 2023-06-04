@@ -47,7 +47,7 @@
  */
 
 /**
- * @typedef {'Day' | 'Event' | 'Time' | 'Price' | 'Offers'} SortType
+ * @typedef {'day' | 'event' | 'time' | 'price' | 'offers'} SortType
  */
 
 /**
@@ -83,6 +83,7 @@
 /**
  * @typedef UrlParams
  * @prop {string} [edit]
+ *  @prop {SortType} [sort]
  */
 
 /**
