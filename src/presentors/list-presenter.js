@@ -11,7 +11,11 @@ class ListPresenter extends Presenter {
    * @return {ListViewState}
    */
   createViewState() {
-    const points = this.model.getPoints();
+    /**
+       * @type {UrlParams}
+       */
+    const urlParams = this.getUrlParams();
+    const points = this.model.getPoints(urlParams);
     const items = points.map(this.createPointViewState, this);
     return {items};
   }
@@ -83,9 +87,22 @@ class ListPresenter extends Presenter {
       delete urlParams.edit;
       this.setUrlParams(urlParams);
     };
+    /**
+     * @param {CustomEvent & {target: CardView}} event
+     */
+    const handleNewFavorite = (event) => {
+      // /**
+      //  * @type {CardView}
+      //  */
+      const card = event.target;
+      const point = card.state;
+      point.isFavorite = !point.isFavorite;
+      card.render();
+    };
 
     this.view.addEventListener('open', handleViewOpen);
     this.view.addEventListener('close', handleViewClose);
+    this.view.addEventListener('favorite', handleNewFavorite);
   }
 }
 

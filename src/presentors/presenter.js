@@ -12,8 +12,10 @@ class Presenter {
   constructor(view, model) {
     this.view = view;
     this.model = model;
+
     this.addEventListeners();
     this.updateView();
+
     window.addEventListener('popstate', () => this.updateView());
   }
 

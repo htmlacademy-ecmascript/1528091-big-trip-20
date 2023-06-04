@@ -10,7 +10,7 @@ class AddPresenter extends Presenter {
    */
   createViewState() {
     return {
-      isDisabled:true
+      isDisabled: false
     };
   }
 }
