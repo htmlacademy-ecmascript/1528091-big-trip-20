@@ -1,5 +1,6 @@
 
 import {formatDate, formatDuration, formatTime} from '../utils.js';
+import EditorView from '../views/editor-view.js';
 import Presenter from './presenter.js';
 
 /**
@@ -67,42 +68,73 @@ class ListPresenter extends Presenter {
    */
 
   addEventListeners() {
-    /**
+    this.view.addEventListener('open', this.handleViewOpen.bind(this));
+    this.view.addEventListener('close', this.handleViewClose.bind(this));
+    this.view.addEventListener('favorite', this.handleNewFavorite.bind(this));
+    this.view.addEventListener('edit', this.handleViewEdit.bind(this));
+  }
+
+  /**
      * @param {CustomEvent & {target: CardView}} event
      */
-    const handleViewOpen = (event) => {
-      /**
-       * @type {UrlParams}
-       */
-      const urlParams = this.getUrlParams();
-      urlParams.edit = event.target.state.id;
-      this.setUrlParams(urlParams);
-    };
-
-    const handleViewClose = () => {
-      /**
-       * @type {UrlParams}
-       */
-      const urlParams = this.getUrlParams();
-      delete urlParams.edit;
-      this.setUrlParams(urlParams);
-    };
+  handleViewOpen (event){
     /**
-     * @param {CustomEvent & {target: CardView}} event
+     * @type {UrlParams}
      */
-    const handleNewFavorite = (event) => {
-      // /**
-      //  * @type {CardView}
-      //  */
-      const card = event.target;
-      const point = card.state;
-      point.isFavorite = !point.isFavorite;
-      card.render();
-    };
+    const urlParams = this.getUrlParams();
+    urlParams.edit = event.target.state.id;
+    this.setUrlParams(urlParams);
+  }
 
-    this.view.addEventListener('open', handleViewOpen);
-    this.view.addEventListener('close', handleViewClose);
-    this.view.addEventListener('favorite', handleNewFavorite);
+  handleViewClose () {
+    /**
+     * @type {UrlParams}
+     */
+    const urlParams = this.getUrlParams();
+    delete urlParams.edit;
+    this.setUrlParams(urlParams);
+  }
+
+  /**
+   * @param {CustomEvent & {target: CardView}} event
+   */
+  handleNewFavorite(event) {
+    const card = event.target;
+    const point = card.state;
+    point.isFavorite = !point.isFavorite;
+    card.render();
+  }
+
+  /**
+   *
+   * @param {CustomEvent & {target: EditorView}}event
+   */
+
+  handleViewEdit(event) {
+    const editor = event.target;
+    const field = event.detail;
+    const point = editor.state;
+    switch (field.name) {
+      case 'event-type': {
+        const offerGroups = this.model.getOfferGroups();
+        const {offers} = offerGroups.find((it) => it.type === field.value);
+        point.offers = offers;
+        point.types.forEach((it) => {
+          it.isSelected = it.value === field.value;
+        });
+        editor.renderTypeAndRelatedFields();
+        break;
+      }
+      case 'event-destination': {
+        const name = field.value.trim();
+        point.destinations.forEach((it) => {
+
+          it.isSelected = name === it.name;
+        });
+        editor.renderDestination();
+        break;
+      }
+    }
   }
 }
 
