@@ -1,6 +1,5 @@
 
 import {formatDate, formatDuration, formatTime} from '../utils.js';
-import EditorView from '../views/editor-view.js';
 import Presenter from './presenter.js';
 
 /**
@@ -107,7 +106,7 @@ class ListPresenter extends Presenter {
 
   /**
    *
-   * @param {CustomEvent & {target: EditorView}}event
+   * @param {CustomEvent & {target: EditorView}} event
    */
 
   handleViewEdit(event) {

@@ -1,4 +1,9 @@
 /**
+ * @typedef {import('flatpickr/dist/types/options.js').Options} FlatPickrOptions
+ */
+
+
+/**
  * @typedef {import('./utils.js').SafeHtml} SafeHtml
  */
 
@@ -8,8 +13,10 @@
  * @typedef {import('./views/filter-view.js').default} FilterView
  * @typedef {import('./views/sort-view.js').default} SortView
  * @typedef {import('./views/list-view.js').default} ListView
+ * @typedef {import('./views/editor-view.js').default} EditorView
  * @typedef {import('./views/card-view.js').default} CardView
  * @typedef {import('./views/view.js').default} View
+
  */
 
 
@@ -75,7 +82,7 @@
  * @prop {string} endTime
  * @prop {string} duration
  * @prop {number} basePrice
- * @prop {Array<Offer & {isSelected: boolean}>} offers
+ * @prop {Array<Offer & {isSelected?: boolean}>} offers
  * @prop {boolean} isFavorite
  * @prop {boolean} isEditable
  */
