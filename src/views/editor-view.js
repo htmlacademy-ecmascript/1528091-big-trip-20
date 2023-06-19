@@ -19,6 +19,7 @@ class EditorView extends View {
     this.addEventListener('click', this.handleClick);
     this.addEventListener('input', this.handleInput);
     this.addEventListener('submit', this.handleSubmit);
+    this.addEventListener('reset', this.handleReset);
   }
 
   connectedCallback() {
@@ -67,6 +68,18 @@ class EditorView extends View {
    */
   handleSubmit(event) {
     const actByDefault = this.notify('save', event.target);
+
+    if(!actByDefault) {
+      event.preventDefault();
+    }
+  }
+
+  /**
+   * @param {Event} event
+   */
+  handleReset(event) {
+    const point = this.state;
+    const actByDefault = this.notify(point.isDraft ? 'close' : 'delete');
 
     if(!actByDefault) {
       event.preventDefault();
@@ -193,15 +206,25 @@ class EditorView extends View {
    * @return {SafeHtml}
    */
   createResetBtnHtml() {
+    const point = this.state;
+    if(point.isDraft) {
+      return html`
+        <button class="event__reset-btn" type="reset">Cancel</button>
+      `;
+    }
     return html`
     <button class="event__reset-btn" type="reset">Delete</button>
-    `;
+  `;
   }
 
   /**
    * @return {SafeHtml}
    */
   createCloseBtnHtml() {
+    const point = this.state;
+    if(point.isDraft) {
+      return '';
+    }
     return html`
       <button class="event__rollup-btn" type="button">
         <span class="visually-hidden">Open event</span>

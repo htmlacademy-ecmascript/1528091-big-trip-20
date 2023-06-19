@@ -50,10 +50,27 @@ class AppModel extends Model{
     const pointIndex = this.#points.findIndex((it) => it.id === adaptedPoint.id);
     this.#points.splice(pointIndex, 1, adaptedPoint);
   }
+
+  /**
+   * @param {string} id
+   */
+  deletePoint(id){
+    const pointIndex = this.#points.findIndex((it) => it.id === id);
+    this.#points.splice(pointIndex, 1);
+  }
+
+  /**
+   * @param {Point} point
+   */
+  addPoint(point){
+    const adaptedPoint = AppModel.adaptPointForServer(point);
+    adaptedPoint.id = crypto.randomUUID();
+    this.#points.push(adaptedPoint);
+  }
+
   /**
    * @returns {Array<Destination>}
    */
-
 
   getDestinations(){
     return structuredClone(this.#destinations);

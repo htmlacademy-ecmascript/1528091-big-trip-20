@@ -86,6 +86,7 @@
  * @prop {Array<Offer & {isSelected?: boolean}>} offers
  * @prop {boolean} isFavorite
  * @prop {boolean} isEditable
+ * @prop {boolean} isDraft
  */
 
 /**
