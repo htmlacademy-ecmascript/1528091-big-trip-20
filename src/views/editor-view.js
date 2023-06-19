@@ -18,6 +18,7 @@ class EditorView extends View {
     this.setAttribute('role', 'list');
     this.addEventListener('click', this.handleClick);
     this.addEventListener('input', this.handleInput);
+    this.addEventListener('submit', this.handleSubmit);
   }
 
   connectedCallback() {
@@ -62,6 +63,17 @@ class EditorView extends View {
   }
 
   /**
+   * @param {SubmitEvent} event
+   */
+  handleSubmit(event) {
+    const actByDefault = this.notify('save', event.target);
+
+    if(!actByDefault) {
+      event.preventDefault();
+    }
+  }
+
+  /**
    * @override
    */
   createHtml() {
@@ -71,6 +83,7 @@ class EditorView extends View {
           ${this.createTypeFieldHtml()}
           ${this.createDestinationFieldHtml()}
           ${this.createScheduleFieldHtml()}
+          ${this.createPriceFieldHtml()}
           ${this.createSubmitBtnHtml()}
           ${this.createResetBtnHtml()}
           ${this.createCloseBtnHtml()}
@@ -162,7 +175,7 @@ class EditorView extends View {
           <span class="visually-hidden">Price</span>
           €
         </label>
-        <input class="event__input  event__input--price" id="event-price-1" type="text" name="event-price" value=${this.state.basePrice}>
+        <input class="event__input  event__input--price" id="event-price-1" type="number" min="1" name="event-price" value=${this.state.basePrice}>
       </div>
     `;
   }
