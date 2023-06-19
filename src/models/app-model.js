@@ -7,6 +7,17 @@ class AppModel extends Model{
   #points = points;
   #destinations = destinations;
   #offerGroups = offerGroups;
+
+  /**
+   * @type {Record<FilterType, (it:Point) => boolean>}
+   */
+  #filterCallbackMap = {
+    everything: () => true,
+    future:(it)=> Date.parse(it.startDateTime) > Date.now(),
+    present: (it) => !this.#filterCallbackMap.past(it) && !this.#filterCallbackMap.future(it),
+    past: (it) => Date.parse(it.endDateTime) < Date.now(),
+  };
+
   /**
    * @type {Record<SortType, (a: Point, b: Point) => number>}
    */
@@ -19,21 +30,47 @@ class AppModel extends Model{
   };
 
   /**
-   * @param {{sort?: SortType}} [criteria]
+   * @param {{filter?: FilterType, sort?: SortType}} [criteria]
    * @return {Array<Point>}
    */
 
   getPoints(criteria = {}) {
     const adaptedPoints = this.#points.map(AppModel.adaptPointForClient);
+    const filterCallback = this.#filterCallbackMap[criteria.filter] ?? this.#filterCallbackMap.everything;
     const sortCallback = this.#sortCallbackMap[criteria.sort] ?? this.#sortCallbackMap.day;
 
-    return adaptedPoints.sort(sortCallback);
+    return adaptedPoints.sort(sortCallback).filter(filterCallback);
+  }
+
+  /**
+   * @param {Point} point
+   */
+  updatePoint(point){
+    const adaptedPoint = AppModel.adaptPointForServer(point);
+    const pointIndex = this.#points.findIndex((it) => it.id === adaptedPoint.id);
+    this.#points.splice(pointIndex, 1, adaptedPoint);
+  }
+
+  /**
+   * @param {string} id
+   */
+  deletePoint(id){
+    const pointIndex = this.#points.findIndex((it) => it.id === id);
+    this.#points.splice(pointIndex, 1);
+  }
+
+  /**
+   * @param {Point} point
+   */
+  addPoint(point){
+    const adaptedPoint = AppModel.adaptPointForServer(point);
+    adaptedPoint.id = crypto.randomUUID();
+    this.#points.push(adaptedPoint);
   }
 
   /**
    * @returns {Array<Destination>}
    */
-
 
   getDestinations(){
     return structuredClone(this.#destinations);
@@ -71,6 +108,23 @@ class AppModel extends Model{
       basePrice:point.base_price,
       offerIds: point.offers,
       isFavorite: point.is_favorite
+    };
+  }
+
+  /**
+   * @param {Point} point
+   * @return {PointInSnakeCase}
+   */
+  static adaptPointForServer(point) {
+    return {
+      'id': point.id,
+      'type': point.type,
+      'destination': point.destinationId,
+      'date_from':point.startDateTime,
+      'date_to': point.endDateTime,
+      'base_price':point.basePrice,
+      'offers': point.offerIds,
+      'is_favorite': point.isFavorite
     };
   }
 

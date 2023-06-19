@@ -15,6 +15,7 @@
  * @typedef {import('./views/list-view.js').default} ListView
  * @typedef {import('./views/editor-view.js').default} EditorView
  * @typedef {import('./views/card-view.js').default} CardView
+ * @typedef {import('./views/placeholder-view.js').default} PlaceholderView
  * @typedef {import('./views/view.js').default} View
 
  */
@@ -38,7 +39,7 @@
  */
 
 /**
- * @typedef {'Everything' | 'Future' | 'Present' | 'Past'}FilterType
+ * @typedef {'everything' | 'future' | 'present' | 'past'}FilterType
  */
 
 /**
@@ -85,12 +86,20 @@
  * @prop {Array<Offer & {isSelected?: boolean}>} offers
  * @prop {boolean} isFavorite
  * @prop {boolean} isEditable
+ * @prop {boolean} isDraft
+ */
+
+/**
+ * @typedef PlaceholderViewState
+ * @prop {string} text
+ * @prop {boolean} isHidden
  */
 
 /**
  * @typedef UrlParams
  * @prop {string} [edit]
- *  @prop {SortType} [sort]
+ * @prop {FilterType} [filter]
+ * @prop {SortType} [sort]
  */
 
 /**
