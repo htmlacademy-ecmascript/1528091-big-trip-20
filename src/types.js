@@ -17,7 +17,6 @@
  * @typedef {import('./views/card-view.js').default} CardView
  * @typedef {import('./views/placeholder-view.js').default} PlaceholderView
  * @typedef {import('./views/view.js').default} View
-
  */
 
 
@@ -92,7 +91,7 @@
 /**
  * @typedef PlaceholderViewState
  * @prop {string} text
- * @prop {boolean} isHidden
+ * @prop {boolean} [isHidden]
  */
 
 /**
@@ -105,7 +104,16 @@
 /**
  * @typedef {import('./models/model.js').default} Model
  * @typedef {import('./models/app-model.js').default} AppModel
+ * @typedef {import('./services/service.js').default} Service
  */
+
+/**
+ * @typedef ServiceOptions
+ * @prop {string} baseUrl
+ * @prop {number} minResponseTime
+ * @prop {string} authorization
+ */
+
 /**
  * @typedef Point
  * @prop {string} id

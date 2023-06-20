@@ -5,9 +5,18 @@ import Presenter from './presenter.js';
  */
 class PlaceholderPresenter extends Presenter {
   /**
+   *@type {boolean}
+   */
+  isModelLoaded;
+
+  /**
+   * @type {Error}
+   */
+  #modelError;
+
+  /**
    * @type {Record<FilterType, string>}
    */
-
   textMap = {
     everything: 'Click New Event to create your first point',
     future: 'There are no future events now',
@@ -16,39 +25,51 @@ class PlaceholderPresenter extends Presenter {
   };
 
   /**
+ * @override
+ */
+  addEventListeners() {
+    this.model.addEventListener('loaded', this.handleModelLoad.bind(this));
+    this.model.addEventListener('error', this.handleModelError.bind(this));
+  }
+
+  handleModelLoad() {
+    this.isModelLoaded = true;
+    this.updateView();
+  }
+
+  /**
+
+   * @param {CustomEvent<Error>} event
+   */
+  handleModelError(event) {
+    this.#modelError = event.detail;
+    this.updateView();
+  }
+
+  /**
    * @override
    * @return {PlaceholderViewState}
    */
   createViewState() {
-    const urlParams = this.getUrlParams();
-    const points = this.model.getPoints(urlParams);
-    const placeholderObject = {
-      text: '',
-      isHidden: points.length > 0
+    if (this.isModelLoaded) {
+      const urlParams = this.getUrlParams();
+      const points = this.model.getPoints(urlParams);
+
+      return {
+        text: this.textMap[urlParams.filter] ?? this.textMap.everything,
+        isHidden: points.length > 0
+      };
+    }
+
+    if (this.#modelError) {
+      return {
+        text: String(this.#modelError)
+      };
+    }
+    return {
+      text: 'Loading...'
     };
 
-    switch (urlParams.filter) {
-      case 'everything':
-        placeholderObject.text = this.textMap.everything;
-        break;
-
-      case 'future':
-        placeholderObject.text = this.textMap.future;
-        break;
-
-      case 'present':
-        placeholderObject.text = this.textMap.present;
-        break;
-
-      case 'past':
-        placeholderObject.text = this.textMap.past;
-        break;
-
-      default:
-        placeholderObject.text = this.textMap.everything;
-        break;
-    }
-    return placeholderObject;
   }
 }
 

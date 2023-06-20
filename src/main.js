@@ -14,46 +14,18 @@ import FilterPresenter from './presentors/filter-presenter';
 import ListPresenter from './presentors/list-presenter';
 import PlaceholderPresenter from './presentors/placeholder-presenter';
 
+import ApiService from './services/api-service';
+const apiService = new ApiService({
+  authorization: 'Basic EmilyKanarsky'
+});
+const appModel = new AppModel(apiService);
 
-const appModel = new AppModel();
-
-new BriefPresenter(document.querySelector('brief-view'));
-new AddPresenter(document.querySelector('add-view'));
-new SortPresenter(document.querySelector('sort-view'));
 new PlaceholderPresenter(document.querySelector('placeholder-view'), appModel);
-new FilterPresenter(document.querySelector('filter-view'));
-new ListPresenter(document.querySelector('list-view'), appModel);
-// /**
-//   * @type {BriefView}
-//  */
-// const briefView = document.querySelector('brief-view');
 
-// /**
-//   * @type {AddView}
-//  */
-
-// const addView = document.querySelector('add-view');
-
-// /**
-//   * @type {FilterView}
-//  */
-
-// const filterView = document.querySelector('filter-view');
-
-// /**
-//   * @type {SortView}
-//  */
-
-// const sortView = document.querySelector('sort-view');
-
-// /**
-//   * @type {ListView}
-//  */
-
-// const listView = document.querySelector('list-view');
-
-// briefView.render();
-// addView.render();
-// filterView.render();
-// sortView.render();
-// listView.render();
+appModel.loadData().then(()=> {
+  new BriefPresenter(document.querySelector('brief-view'));
+  new AddPresenter(document.querySelector('add-view'));
+  new SortPresenter(document.querySelector('sort-view'));
+  new FilterPresenter(document.querySelector('filter-view'));
+  new ListPresenter(document.querySelector('list-view'), appModel);
+});
