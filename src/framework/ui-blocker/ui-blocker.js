@@ -1,3 +1,4 @@
+// @ts-nocheck
 import './ui-blocker.css';
 
 /**
