@@ -19,8 +19,7 @@ export default class UiBlocker {
   /** @type {number} Время вызова метода unblock */
   #endTime;
 
-  /** @type {NodeJS.Timer} Идентификатор таймера */
-  //была замена  @type {number}
+  /** @type {number} Идентификатор таймера */
   #timerId;
 
   /**
