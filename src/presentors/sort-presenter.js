@@ -1,7 +1,7 @@
 import Presenter from './presenter.js';
 
 /**
- * @extends {Presenter<SortView>}
+ * @extends {Presenter<SortView, AppModel>}
  */
 class SortPresenter extends Presenter {
   /**
@@ -18,15 +18,15 @@ class SortPresenter extends Presenter {
     /**
      * @type {UrlParams}
      */
-    const { sort } = this.getUrlParams();
-
-    const items = types.map((it) => (
+    const { sort = 'day', filter } = this.getUrlParams();
+    const points = this.model.getPoints({filter});
+    const items = points.length ? types.map((it) => (
       {
         value: it,
         isSelected: it === sort,
-        isDisabled: false
+        isDisabled: it === 'event' || it === 'offers'
       }
-    ));
+    )) : [];
     return {items};
   }
 
