@@ -36,8 +36,8 @@ class AppModel extends Model{
   #sortCallbackMap = {
     day: (a, b) => Date.parse(a.startDateTime) - Date.parse(b.startDateTime),
     event:()=> 0,
-    time: (a, b) => this.#calcPointDuration(a) - this.#calcPointDuration(b) ,
-    price: (a, b) => a.basePrice - b.basePrice,
+    time: (a, b) => this.#calcPointDuration(b) - this.#calcPointDuration(a) ,
+    price: (a, b) => b.basePrice - a.basePrice,
     offers: () => 0,
   };
 
