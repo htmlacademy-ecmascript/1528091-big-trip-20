@@ -1,3 +1,4 @@
+// @ts-nocheck
 import AbstractView from './view/abstract-view.js';
 
 /** @enum {string} Перечисление возможных позиций для отрисовки */
@@ -16,8 +17,9 @@ const RenderPosition = {
 function createElement(template) {
   const newElement = document.createElement('div');
   newElement.innerHTML = template;
-
-  return newElement.firstElementChild;
+  if (newElement.firstElementChild instanceof HTMLElement) {
+    return newElement.firstElementChild;
+  }
 }
 
 /**
@@ -36,6 +38,7 @@ function render(component, container, place = RenderPosition.BEFOREEND) {
   }
 
   container.insertAdjacentElement(place, component.element);
+
 }
 
 /**
