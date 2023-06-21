@@ -9,6 +9,7 @@ class BriefPresenter extends Presenter {
    * @override
    * @return {BriefViewState}
    */
+
   createViewState() {
     return {
       places: this.getPlaces(),
@@ -65,9 +66,25 @@ class BriefPresenter extends Presenter {
       }, point.basePrice);
       return totalCost + pointCost;
     },0);
-
-
   }
+
+  /**
+ * @override
+ */
+  handleWindowPopState() {}
+
+
+  /**
+   * @override
+   */
+  addEventListeners() {
+    this.model.addEventListener('change', this.handleModelChange.bind(this));
+  }
+
+  handleModelChange() {
+    this.updateView();
+  }
+
 }
 
 export default BriefPresenter;
