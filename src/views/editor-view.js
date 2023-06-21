@@ -197,8 +197,11 @@ class EditorView extends View {
    * @return {SafeHtml}
    */
   createSubmitBtnHtml() {
+    const point = this.state;
     return html`
-    <button class="event__save-btn  btn  btn--blue" type="submit">Save</button>
+      <button class="event__save-btn  btn  btn--blue" type="submit" ${point.isSaving ? 'disabled' : ''}>
+        ${point.isSaving ? 'Saving...' : 'Save'}
+      </button>
     `;
   }
 
@@ -213,8 +216,10 @@ class EditorView extends View {
       `;
     }
     return html`
-    <button class="event__reset-btn" type="reset">Delete</button>
-  `;
+      <button class="event__reset-btn btn" type="reset" ${point.isDeleting ? 'disabled' : ''}>
+        ${point.isDeleting ? 'Deleting...' : 'Delete'}
+      </button>
+    `;
   }
 
   /**
@@ -243,8 +248,8 @@ class EditorView extends View {
     <div class="event__available-offers">
     ${offersList.map((it) => html`
         <div class="event__offer-selector">
-          <input class="event__offer-checkbox  visually-hidden" id="event-offer-${it.id}" type="checkbox" name="event-offer" ${it.isSelected ? 'checked' : ''} value=>
-          <label class="event__offer-label" for="event-offer-${it.id}">
+          <input class="event__offer-checkbox  visually-hidden" id="${it.id}" type="checkbox" name="event-offer" ${it.isSelected ? 'checked' : ''} value=>
+          <label class="event__offer-label" for="${it.id}">
             <span class="event__offer-title">${it.title}</span>
             +€&nbsp;
             <span class="event__offer-price">${it.price}</span>
@@ -287,6 +292,14 @@ class EditorView extends View {
 
   renderDestination() {
     this.render('.event__section--destination', this.createDestinationHtml());
+  }
+
+  renderSubmitButton() {
+    this.render('.event__save-btn', this.createSubmitBtnHtml());
+  }
+
+  renderResetButton() {
+    this.render('.event__reset-btn', this.createResetBtnHtml());
   }
 
 }
