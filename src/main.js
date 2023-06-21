@@ -4,7 +4,7 @@ import './views/filter-view';
 import './views/sort-view';
 import './views/list-view';
 import './views/placeholder-view';
-
+import './views/overlay-view';
 import AppModel from './models/app-model';
 
 import BriefPresenter from './presentors/brief-presenter';
@@ -13,8 +13,10 @@ import SortPresenter from './presentors/sort-presenter';
 import FilterPresenter from './presentors/filter-presenter';
 import ListPresenter from './presentors/list-presenter';
 import PlaceholderPresenter from './presentors/placeholder-presenter';
+import OverlayPresenter from './presentors/overlay-presenter';
 
 import ApiService from './services/api-service';
+
 const apiService = new ApiService({
   authorization: 'Basic EmilyKanarsky'
 });
@@ -28,4 +30,5 @@ appModel.loadData().then(()=> {
   new SortPresenter(document.querySelector('sort-view'));
   new FilterPresenter(document.querySelector('filter-view'));
   new ListPresenter(document.querySelector('list-view'), appModel);
+  new OverlayPresenter(document.querySelector('overlay-view'), appModel);
 });

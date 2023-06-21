@@ -1,4 +1,5 @@
 import Model from './model';
+// eslint-disable-next-line no-unused-vars
 import ApiService from '../services/api-service';
 
 class AppModel extends Model{
@@ -86,27 +87,46 @@ class AppModel extends Model{
   /**
    * @param {Point} point
    */
-  updatePoint(point){
-    const adaptedPoint = AppModel.adaptPointForServer(point);
-    const pointIndex = this.#points.findIndex((it) => it.id === adaptedPoint.id);
-    this.#points.splice(pointIndex, 1, adaptedPoint);
-  }
+  async addPoint(point){
+    try {
+      this.notify('busy');
+      const adaptedPoint = AppModel.adaptPointForServer(point);
+      const addedPoint = await this.#apiService.addPoint(adaptedPoint);
+      this.#points.push(addedPoint);
 
-  /**
-   * @param {string} id
-   */
-  deletePoint(id){
-    const pointIndex = this.#points.findIndex((it) => it.id === id);
-    this.#points.splice(pointIndex, 1);
+    } finally {
+      this.notify('idle');
+    }
   }
 
   /**
    * @param {Point} point
    */
-  addPoint(point){
-    const adaptedPoint = AppModel.adaptPointForServer(point);
-    adaptedPoint.id = crypto.randomUUID();
-    this.#points.push(adaptedPoint);
+  async updatePoint(point){
+    try{
+      this.notify('busy');
+      const adaptedPoint = AppModel.adaptPointForServer(point);
+      const updatedPoint = await this.#apiService.updatePoint(adaptedPoint);
+      const pointIndex = this.#points.findIndex((it) => it.id === updatedPoint.id);
+      this.#points.splice(pointIndex, 1, updatedPoint);
+
+    } finally {
+      this.notify('idle');
+    }
+  }
+
+  /**
+   * @param {string} id
+   */
+  async deletePoint(id){
+    try {
+      this.notify('busy');
+      await this.#apiService.deletePoint(id);
+      const pointIndex = this.#points.findIndex((it) => it.id === id);
+      this.#points.splice(pointIndex, 1);
+    } finally {
+      this.notify('idle');
+    }
   }
 
   /**
