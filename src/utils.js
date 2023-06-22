@@ -10,6 +10,7 @@ dayjs.extend(durationPlugin);
  * @param {boolean} [isNarrow]
  * @return {string}
  */
+
 function formatDate(dateTime, isNarrow) {
   const formattedDate = dayjs(dateTime).format(isNarrow ? 'D' : 'MMM D');
   return formattedDate;
@@ -38,6 +39,7 @@ function formatDateRange(startDateTime, endDateTime) {
  * @param {string} dateTime
  * @return {string}
  */
+
 function formatTime(dateTime) {
   const formattedTime = dayjs(dateTime).format('HH:mm');
   return formattedTime;
@@ -48,6 +50,7 @@ function formatTime(dateTime) {
  * @param {string} endDateTime
  * @return {string}
  */
+
 function formatDuration(startDateTime, endDateTime) {
   const ms = dayjs(endDateTime).diff(startDateTime);
   const duration = dayjs.duration(ms);
@@ -63,11 +66,11 @@ function formatDuration(startDateTime, endDateTime) {
 }
 
 /**
- *
  * @param {HTMLInputElement} startDateField
  * @param {HTMLInputElement} endDateField
  * @return {()=> void}
  */
+
 function createDatePickers(startDateField, endDateField) {
   /**
    * @type {FlatPickrOptions}
@@ -100,6 +103,7 @@ class SafeHtml extends String {}
  * @param {...any} values
  * @return {SafeHtml}
  */
+
 function html(strings, ...values) {
   const result = strings.reduce((before, after, index) => {
     const value = values[index - 1];

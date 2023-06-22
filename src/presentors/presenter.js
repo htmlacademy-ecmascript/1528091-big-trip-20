@@ -27,10 +27,6 @@ class Presenter {
     this.view.render();
   }
 
-  updateModel(){
-
-  }
-
   createViewState() {
     return null;
   }
@@ -60,7 +56,6 @@ class Presenter {
  */
   getUrlParams() {
     const url = this.getUrl();
-
     return Object.fromEntries(url.searchParams);
   }
 

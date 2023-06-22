@@ -28,6 +28,9 @@ class FilterPresenter extends Presenter {
     return {items};
   }
 
+  /**
+   * @override
+   */
   addEventListeners() {
     this.view.addEventListener('change', this.handleViewChange.bind(this));
   }
