@@ -30,7 +30,7 @@ class OverlayView extends View {
 
   /**
    * @param {KeyboardEvent} event
-  */
+   */
   handleEvent(event) {
     event.preventDefault();
   }
