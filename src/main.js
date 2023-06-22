@@ -7,13 +7,13 @@ import './views/placeholder-view';
 import './views/overlay-view';
 import AppModel from './models/app-model';
 
-import BriefPresenter from './presentors/brief-presenter';
-import AddPresenter from './presentors/add-presenter';
-import SortPresenter from './presentors/sort-presenter';
-import FilterPresenter from './presentors/filter-presenter';
-import ListPresenter from './presentors/list-presenter';
-import PlaceholderPresenter from './presentors/placeholder-presenter';
-import OverlayPresenter from './presentors/overlay-presenter';
+import BriefPresenter from './presenters/brief-presenter';
+import AddPresenter from './presenters/add-presenter';
+import SortPresenter from './presenters/sort-presenter';
+import FilterPresenter from './presenters/filter-presenter';
+import ListPresenter from './presenters/list-presenter';
+import PlaceholderPresenter from './presenters/placeholder-presenter';
+import OverlayPresenter from './presenters/overlay-presenter';
 
 import ApiService from './services/api-service';
 

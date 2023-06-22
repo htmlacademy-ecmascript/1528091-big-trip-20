@@ -4,6 +4,7 @@ import Presenter from './presenter.js';
  * @extends {Presenter<OverlayView, AppModel>}
  */
 class OverlayPresenter extends Presenter {
+
   /**
    * @type {boolean}
    */
@@ -28,13 +29,8 @@ class OverlayPresenter extends Presenter {
    * @return {OverlayViewState}
    */
   createViewState() {
-    if(this.isModelBusy) {
-      return {
-        isActive: true
-      };
-    }
     return {
-      isActive: false
+      isActive: this.isModelBusy
     };
   }
 }

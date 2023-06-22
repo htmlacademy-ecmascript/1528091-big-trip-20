@@ -14,7 +14,7 @@ class BriefPresenter extends Presenter {
     return {
       places: this.getPlaces(),
       dates: this.getDates(),
-      cost: String(this.getCost())
+      cost: this.getCost()
     };
   }
 
@@ -45,7 +45,7 @@ class BriefPresenter extends Presenter {
       const lastPoint = points.at(-1);
       return formatDateRange(firstPoint.startDateTime, lastPoint.endDateTime);
     }
-    return 'Mar 18 - 20';
+    return '';
   }
 
   /**
