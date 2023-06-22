@@ -1,4 +1,6 @@
 import Model from './model';
+// eslint-disable-next-line no-unused-vars
+import ApiService from '../services/api-service';
 
 class AppModel extends Model{
   #apiService;
