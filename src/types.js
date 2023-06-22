@@ -25,7 +25,7 @@
  * @typedef BriefViewState
  * @prop {string} places
  * @prop {string} dates
- * @prop {string} cost
+ * @prop {number} cost
  */
 
 /**
@@ -113,6 +113,7 @@
  * @typedef {import('./models/model.js').default} Model
  * @typedef {import('./models/app-model.js').default} AppModel
  * @typedef {import('./services/service.js').default} Service
+ * @typedef {import('./services/api-service.js').default} ApiService
  */
 
 /**

@@ -63,12 +63,12 @@ function formatDuration(startDateTime, endDateTime) {
 }
 
 /**
- *
  * @param {HTMLInputElement} startDateField
  * @param {HTMLInputElement} endDateField
  * @return {()=> void}
  */
 function createDatePickers(startDateField, endDateField) {
+
   /**
    * @type {FlatPickrOptions}
    */

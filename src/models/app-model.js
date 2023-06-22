@@ -1,6 +1,4 @@
 import Model from './model';
-// eslint-disable-next-line no-unused-vars
-import ApiService from '../services/api-service';
 
 class AppModel extends Model{
   #apiService;
@@ -75,7 +73,6 @@ class AppModel extends Model{
    * @param {{filter?: FilterType, sort?: SortType}} [criteria]
    * @return {Array<Point>}
    */
-
   getPoints(criteria = {}) {
     const adaptedPoints = this.#points.map(AppModel.adaptPointForClient);
     const filterCallback = this.#filterCallbackMap[criteria.filter] ?? this.#filterCallbackMap.everything;
@@ -127,6 +124,7 @@ class AppModel extends Model{
       const pointIndex = this.#points.findIndex((it) => it.id === id);
       this.#points.splice(pointIndex, 1);
       this.notify('change');
+
     } finally {
       this.notify('idle');
     }
@@ -135,7 +133,6 @@ class AppModel extends Model{
   /**
    * @returns {Array<Destination>}
    */
-
   getDestinations(){
     return structuredClone(this.#destinations);
   }
@@ -143,16 +140,14 @@ class AppModel extends Model{
   /**
    * @returns {Array<OfferGroup>}
    */
-
   getOfferGroups() {
     return structuredClone(this.#offerGroups);
   }
 
   /**
- *
- * @param {Point} point
- * @return {number}
- */
+   * @param {Point} point
+   * @return {number}
+   */
   #calcPointDuration(point) {
     return Date.parse(point.endDateTime) - Date.parse(point.startDateTime);
   }

@@ -1,4 +1,5 @@
 import Service from './service';
+
 /**
  * @extends {Service}
  */
@@ -16,12 +17,11 @@ class ApiService extends Service{
   }
 
   /**
- * @return {Promise<Array<PointInSnakeCase>>}
- */
+   * @return {Promise<Array<PointInSnakeCase>>}
+   */
   async getPoints() {
     const response = await this.request('points');
-    const points = response.json();
-    return points;
+    return response.json();
   }
 
 
@@ -64,21 +64,19 @@ class ApiService extends Service{
   }
 
   /**
- * @return {Promise<Array<Destination>>}
- */
+   * @return {Promise<Array<Destination>>}
+   */
   async getDestinations() {
     const response = await this.request('destinations');
-    const destinations = response.json();
-    return destinations;
+    return response.json();
   }
 
   /**
- * @return {Promise<Array<OfferGroup>>}
- */
+   * @return {Promise<Array<OfferGroup>>}
+   */
   async getOfferGroups() {
     const response = await this.request('offers');
-    const offers = response.json();
-    return offers;
+    return response.json();
   }
 }
 export default ApiService;

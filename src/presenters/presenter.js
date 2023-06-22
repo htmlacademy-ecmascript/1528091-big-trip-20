@@ -5,6 +5,7 @@
  */
 
 class Presenter {
+
   /**
    * @param {V} view
    * @param {M} model
@@ -27,21 +28,21 @@ class Presenter {
     this.view.render();
   }
 
-  updateModel(){
-
-  }
-
+  /**
+   * @abstract
+   */
   createViewState() {
     return null;
   }
 
-  addEventListeners() {
-
-  }
+  /**
+   * @abstract
+   */
+  addEventListeners() {}
 
   /**
- * @param {Object<string, string>} params
- */
+   * @param {Object<string, string>} params
+   */
   setUrlParams(params) {
     const url = this.getUrl();
 
@@ -56,8 +57,8 @@ class Presenter {
   }
 
   /**
- * @return {Object<string, string>}
- */
+   * @return {Object<string, string>}
+   */
   getUrlParams() {
     const url = this.getUrl();
 
@@ -65,8 +66,8 @@ class Presenter {
   }
 
   /**
- * @return {URL}
- */
+   * @return {URL}
+   */
   getUrl() {
     return new URL(window.location.href);
   }

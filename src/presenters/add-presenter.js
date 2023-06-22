@@ -28,8 +28,8 @@ class AddPresenter extends Presenter {
 
   handleViewClick(){
     /**
-      * @type {UrlParams}
-      */
+     * @type {UrlParams}
+     */
     const urlParams = {
       edit: 'draft'
     };

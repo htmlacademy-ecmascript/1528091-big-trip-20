@@ -5,6 +5,7 @@ import {html} from '../utils.js';
  * @extends {View<AddViewState>}
  */
 class AddView extends View {
+
   /**
    * @override
    */

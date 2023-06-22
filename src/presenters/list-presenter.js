@@ -6,6 +6,7 @@ import Presenter from './presenter.js';
  * @extends {Presenter<ListView, AppModel>}
  */
 class ListPresenter extends Presenter {
+
   /**
    * @override
    * @return {ListViewState}
@@ -56,8 +57,8 @@ class ListPresenter extends Presenter {
     }));
 
     /**
-       * @type {UrlParams}
-       */
+     * @type {UrlParams}
+     */
     const urlParams = this.getUrlParams();
     const isDraft = point.id === undefined;
     const isEditable = isDraft || point.id === urlParams.edit;
@@ -100,7 +101,6 @@ class ListPresenter extends Presenter {
   /**
    * @override
    */
-
   addEventListeners() {
     this.view.addEventListener('open', this.handleViewOpen.bind(this));
     this.view.addEventListener('close', this.handleViewClose.bind(this));
@@ -111,8 +111,8 @@ class ListPresenter extends Presenter {
   }
 
   /**
-     * @param {CustomEvent & {target: CardView}} event
-     */
+   * @param {CustomEvent & {target: CardView}} event
+   */
   handleViewOpen (event){
     /**
      * @type {UrlParams}
@@ -149,10 +149,8 @@ class ListPresenter extends Presenter {
   }
 
   /**
-   *
    * @param {CustomEvent & {target: EditorView}} event
    */
-
   handleViewEdit(event) {
     const editor = event.target;
     const field = event.detail;

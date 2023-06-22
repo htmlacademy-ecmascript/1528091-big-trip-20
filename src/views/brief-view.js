@@ -4,6 +4,7 @@ import {html} from '../utils.js';
 /**
  * @extends {View<BriefViewState>}
  */
+
 class BriefView extends View {
   constructor() {
     super();

@@ -24,7 +24,6 @@ class ListView extends View {
   }
 
   /**
-   *
    * @param {PointViewState} state
    * @return {CardView | EditorView}
    */

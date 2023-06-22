@@ -5,7 +5,7 @@ import Presenter from './presenter.js';
  */
 class PlaceholderPresenter extends Presenter {
   /**
-   *@type {boolean}
+   * @type {boolean}
    */
   isModelLoaded;
 
@@ -25,8 +25,8 @@ class PlaceholderPresenter extends Presenter {
   };
 
   /**
- * @override
- */
+   * @override
+   */
   addEventListeners() {
     this.model.addEventListener('loaded', this.handleModelLoad.bind(this));
     this.model.addEventListener('error', this.handleModelError.bind(this));
